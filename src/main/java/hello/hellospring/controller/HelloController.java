@@ -24,7 +24,34 @@ public class HelloController {
     }
     @GetMapping("hello-spring")
     @ResponseBody //http의 body부에 데이터를 직접 넣어준다.
-    public String helloString(@RequestParam("name") String name){
+    public String helloString(@RequestParam("name") String name) {
         return "hello " + name; //뷰없이 문자 그대로 내려감
     }
+
+    //API방식 : 객체를 반환
+    @GetMapping("hello-api")
+    @ResponseBody
+    public  Hello helloApi(@RequestParam("name") String name){
+        Hello hello = new Hello();
+        hello.setName(name);
+        return hello;
+    }
+
+    //property 접근방식
+    static class Hello{
+        private String name;
+
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+    }
+
+
+
+
+
 }
